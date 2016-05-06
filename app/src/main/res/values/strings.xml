@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">guideMe</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_poidetails">POIDetailsActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_add_poi">AddPOIActivity</string>
+</resources>

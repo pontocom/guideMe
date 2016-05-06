@@ -1,0 +1,734 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"con",
+				"config"
+			],
+			[
+				"use",
+				"user"
+			],
+			[
+				"pa",
+				"password"
+			],
+			[
+				"u",
+				"uUuid"
+			],
+			[
+				"re",
+				"req"
+			],
+			[
+				"lo",
+				"loginURL  (variable)"
+			],
+			[
+				"fie",
+				"fields_string  (variable)"
+			],
+			[
+				"url",
+				"urlencode"
+			],
+			[
+				"ur",
+				"urlencode"
+			],
+			[
+				"json",
+				"json_encode"
+			],
+			[
+				"sign",
+				"signinURL"
+			],
+			[
+				"fu",
+				"function"
+			],
+			[
+				"respo",
+				"responseText"
+			],
+			[
+				"sess",
+				"sessionURL"
+			],
+			[
+				"us",
+				"userProfileWindow"
+			],
+			[
+				"main",
+				"mainWindow"
+			],
+			[
+				"inde",
+				"indexWindow"
+			],
+			[
+				"service",
+				"serviceAlert"
+			],
+			[
+				"services",
+				"servicesnok"
+			],
+			[
+				"stat",
+				"statusmessage"
+			],
+			[
+				"serv",
+				"servicesnok"
+			],
+			[
+				"id",
+				"id_default_account"
+			],
+			[
+				"d",
+				"default"
+			],
+			[
+				"nu",
+				"num_unk"
+			],
+			[
+				"Ti",
+				"Titanium"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "server.js",
+			"settings":
+			{
+				"buffer_size": 908,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "poi.sql",
+			"settings":
+			{
+				"buffer_size": 302,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "poi.js",
+			"settings":
+			{
+				"buffer_size": 5166,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/cserrao/Downloads/nodejs-server-server/index.js",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "---\nswagger: \"2.0\"\ninfo:\n  description: \"Move your app forward with the Uber API\"\n  version: \"1.0.0\"\n  title: \"Uber API\"\nhost: \"api.uber.com\"\nbasePath: \"/v1\"\nschemes:\n- \"https\"\nproduces:\n- \"application/json\"\npaths:\n  /estimates/price:\n    get:\n      tags:\n      - \"Estimates\"\n      summary: \"Price Estimates\"\n      description: \"The Price Estimates endpoint returns an estimated price range\\n\\\n        for each product offered at a given location. The price estimate is\\nprovided\\\n        \\ as a formatted string with the full price range and the localized\\ncurrency\\\n        \\ symbol.<br><br>The response also includes low and high estimates,\\nand the\\\n        \\ [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for\\nsituations\\\n        \\ requiring currency conversion. When surge is active for a particular\\nproduct,\\\n        \\ its surge_multiplier will be greater than 1, but the price estimate\\nalready\\\n        \\ factors in this multiplier.\\n\"\n      operationId: \"estimatesPriceGET\"\n      parameters:\n      - name: \"start_latitude\"\n        in: \"query\"\n        description: \"Latitude component of start location.\"\n        required: true\n        type: \"number\"\n        format: \"double\"\n      - name: \"start_longitude\"\n        in: \"query\"\n        description: \"Longitude component of start location.\"\n        required: true\n        type: \"number\"\n        format: \"double\"\n      - name: \"end_latitude\"\n        in: \"query\"\n        description: \"Latitude component of end location.\"\n        required: true\n        type: \"number\"\n        format: \"double\"\n      - name: \"end_longitude\"\n        in: \"query\"\n        description: \"Longitude component of end location.\"\n        required: true\n        type: \"number\"\n        format: \"double\"\n      responses:\n        200:\n          description: \"An array of price estimates by product\"\n          schema:\n            type: \"array\"\n            items:\n              $ref: \"#/definitions/PriceEstimate\"\n        default:\n          description: \"Unexpected error\"\n          schema:\n            $ref: \"#/definitions/Error\"\n      x-swagger-router-controller: \"Estimates\"\n  /estimates/time:\n    get:\n      tags:\n      - \"Estimates\"\n      summary: \"Time Estimates\"\n      description: \"The Time Estimates endpoint returns ETAs for all products offered\\\n        \\ at a given location, with the responses expressed as integers in seconds.\\\n        \\ We recommend that this endpoint be called every minute to provide the most\\\n        \\ accurate, up-to-date ETAs.\"\n      operationId: \"estimatesTimeGET\"\n      parameters:\n      - name: \"start_latitude\"\n        in: \"query\"\n        description: \"Latitude component of start location.\"\n        required: true\n        type: \"number\"\n        format: \"double\"\n      - name: \"start_longitude\"\n        in: \"query\"\n        description: \"Longitude component of start location.\"\n        required: true\n        type: \"number\"\n        format: \"double\"\n      - name: \"customer_uuid\"\n        in: \"query\"\n        description: \"Unique customer identifier to be used for experience customization.\"\n        required: false\n        type: \"string\"\n        format: \"uuid\"\n      - name: \"product_id\"\n        in: \"query\"\n        description: \"Unique identifier representing a specific product for a given\\\n          \\ latitude & longitude.\"\n        required: false\n        type: \"string\"\n      responses:\n        200:\n          description: \"An array of products\"\n          schema:\n            type: \"array\"\n            items:\n              $ref: \"#/definitions/Product\"\n        default:\n          description: \"Unexpected error\"\n          schema:\n            $ref: \"#/definitions/Error\"\n      x-swagger-router-controller: \"Estimates\"\n  /history:\n    get:\n      tags:\n      - \"User\"\n      summary: \"User Activity\"\n      description: \"The User Activity endpoint returns data about a user's lifetime\\\n        \\ activity with Uber. The response will include pickup locations and times,\\\n        \\ dropoff locations and times, the distance of past requests, and information\\\n        \\ about which products were requested.<br><br>The history array in the response\\\n        \\ will have a maximum length based on the limit parameter. The response value\\\n        \\ count may exceed limit, therefore subsequent API requests may be necessary.\"\n      operationId: \"historyGET\"\n      parameters:\n      - name: \"offset\"\n        in: \"query\"\n        description: \"Offset the list of returned results by this amount. Default\\\n          \\ is zero.\"\n        required: false\n        type: \"integer\"\n        format: \"int32\"\n      - name: \"limit\"\n        in: \"query\"\n        description: \"Number of items to retrieve. Default is 5, maximum is 100.\"\n        required: false\n        type: \"integer\"\n        format: \"int32\"\n      responses:\n        200:\n          description: \"History information for the given user\"\n          schema:\n            $ref: \"#/definitions/Activities\"\n        default:\n          description: \"Unexpected error\"\n          schema:\n            $ref: \"#/definitions/Error\"\n      x-swagger-router-controller: \"User\"\n  /me:\n    get:\n      tags:\n      - \"User\"\n      summary: \"User Profile\"\n      description: \"The User Profile endpoint returns information about the Uber user\\\n        \\ that has authorized with the application.\"\n      operationId: \"meGET\"\n      parameters: []\n      responses:\n        200:\n          description: \"Profile information for a user\"\n          schema:\n            $ref: \"#/definitions/Profile\"\n        default:\n          description: \"Unexpected error\"\n          schema:\n            $ref: \"#/definitions/Error\"\n      x-swagger-router-controller: \"User\"\n  /products:\n    get:\n      tags:\n      - \"Products\"\n      summary: \"Product Types\"\n      description: \"The Products endpoint returns information about the *Uber* products\\n\\\n        offered at a given location. The response includes the display name\\nand other\\\n        \\ details about each product, and lists the products in the\\nproper display\\\n        \\ order.\\n\"\n      operationId: \"productsGET\"\n      parameters:\n      - name: \"latitude\"\n        in: \"query\"\n        description: \"Latitude component of location.\"\n        required: true\n        type: \"number\"\n        format: \"double\"\n      - name: \"longitude\"\n        in: \"query\"\n        description: \"Longitude component of location.\"\n        required: true\n        type: \"number\"\n        format: \"double\"\n      responses:\n        200:\n          description: \"An array of products\"\n          schema:\n            type: \"array\"\n            items:\n              $ref: \"#/definitions/Product\"\n        default:\n          description: \"Unexpected error\"\n          schema:\n            $ref: \"#/definitions/Error\"\n      x-swagger-router-controller: \"Products\"\ndefinitions:\n  Product:\n    type: \"object\"\n    properties:\n      product_id:\n        type: \"string\"\n        description: \"Unique identifier representing a specific product for a given\\\n          \\ latitude & longitude. For example, uberX in San Francisco will have a\\\n          \\ different product_id than uberX in Los Angeles.\"\n      description:\n        type: \"string\"\n        description: \"Description of product.\"\n      display_name:\n        type: \"string\"\n        description: \"Display name of product.\"\n      capacity:\n        type: \"string\"\n        description: \"Capacity of product. For example, 4 people.\"\n      image:\n        type: \"string\"\n        description: \"Image URL representing the product.\"\n  PriceEstimate:\n    type: \"object\"\n    properties:\n      product_id:\n        type: \"string\"\n        description: \"Unique identifier representing a specific product for a given\\\n          \\ latitude & longitude. For example, uberX in San Francisco will have a\\\n          \\ different product_id than uberX in Los Angeles\"\n      currency_code:\n        type: \"string\"\n        description: \"[ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code.\"\n      display_name:\n        type: \"string\"\n        description: \"Display name of product.\"\n      estimate:\n        type: \"string\"\n        description: \"Formatted string of estimate in local currency of the start\\\n          \\ location. Estimate could be a range, a single number (flat rate) or \\\"\\\n          Metered\\\" for TAXI.\"\n      low_estimate:\n        type: \"number\"\n        description: \"Lower bound of the estimated price.\"\n      high_estimate:\n        type: \"number\"\n        description: \"Upper bound of the estimated price.\"\n      surge_multiplier:\n        type: \"number\"\n        description: \"Expected surge multiplier. Surge is active if surge_multiplier\\\n          \\ is greater than 1. Price estimate already factors in the surge multiplier.\"\n  Profile:\n    type: \"object\"\n    properties:\n      first_name:\n        type: \"string\"\n        description: \"First name of the Uber user.\"\n      last_name:\n        type: \"string\"\n        description: \"Last name of the Uber user.\"\n      email:\n        type: \"string\"\n        description: \"Email address of the Uber user\"\n      picture:\n        type: \"string\"\n        description: \"Image URL of the Uber user.\"\n      promo_code:\n        type: \"string\"\n        description: \"Promo code of the Uber user.\"\n  Activity:\n    type: \"object\"\n    properties:\n      uuid:\n        type: \"string\"\n        description: \"Unique identifier for the activity\"\n  Activities:\n    type: \"object\"\n    properties:\n      offset:\n        type: \"integer\"\n        format: \"int32\"\n        description: \"Position in pagination.\"\n      limit:\n        type: \"integer\"\n        format: \"int32\"\n        description: \"Number of items to retrieve (100 max).\"\n      count:\n        type: \"integer\"\n        format: \"int32\"\n        description: \"Total number of items available.\"\n      history:\n        type: \"array\"\n        items:\n          $ref: \"#/definitions/Activity\"\n  Error:\n    type: \"object\"\n    properties:\n      code:\n        type: \"integer\"\n        format: \"int32\"\n      message:\n        type: \"string\"\n      fields:\n        type: \"string\"\n",
+			"file": "/Users/cserrao/Downloads/nodejs-server-server/api/swagger.yaml",
+			"file_size": 9989,
+			"file_write_time": 1459881580000000,
+			"settings":
+			{
+				"buffer_size": 9989,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/cserrao/Documents/Appcelerator_Studio_Workspace/Basic/build/iphone/Classes/TiViewTemplate.m",
+			"settings":
+			{
+				"buffer_size": 3785,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Package Control Messages\n========================\n\nLaTeXTools\n----------\n\n  LaTeXTools Plugin version 3.7.8 (2016-04-28) changelog:\n  \n  Bugfixes:\n  \n  - Better support for custom syntax files as ST3's new sublime-syntax\n  - Forward sync again send the full path to the source file (#707)\n\n  LaTeXTools Plugin version 3.7.8 (2016-04-21) changelog:\n  \n  Bugfixes:\n  \n  - ST2 will now accept bibliography with just a string\n\n  LaTeXTools Plugin version 3.7.7 (2016-04-21) changelog:\n  \n  **Note**: If you've been following along with the v3.7.x release, v3.7.7 is a major change. I've restored the previous bibliography parsing from v3.6 and earlier as default. If you want to use the new parsing, you need to change the `bibliography` setting to `\"new_bibliography\"`.\n  \n  Features:\n  \n  - Re-added previous bibliography behaviour as default. New bibliography behaviour can be obtained by changing the `bibliography` setting to `\"new_bibliography\"`.\n  \n  Bugfixes:\n  \n  - Properly support \"value and and value\" (interpretted the same as \"value and value\")\n  - KEY now cannot have an equals sign, which solves an issue related to URLs in the bibliography\n\n  LaTeXTools Plugin version 3.7.6 (2016-04-20) changelog:\n  \n  Bugfix:\n  \n  - Fix support for alphanumeric identifiers starting with a number\n\n  LaTeXTools Plugin version 3.7.5 (2016-04-20) changelog:\n  \n  Bugfix:\n  \n  - Fix delete_temp_files reported in #692\n\n  LaTeXTools Plugin version 3.7.4 (2016-04-20) changelog:\n  \n  Bugfix:\n  \n  - Fix additional issues with bib parsing reported in #694\n  - Fix Evince view function reported in #689\n\n  LaTeXTools Plugin version 3.7.3 (2016-04-20) changelog:\n  \n  Bugfix:\n  \n  - Fix additional issues with bib parsing reported on #686\n\n  LaTeXTools Plugin version 3.7.2 (2016-04-19) changelog:\n  \n  Bugfix:\n  \n  - Fix issue #686\n\n  LaTeXTools Plugin version 3.7.1 (2016-04-19) changelog:\n  \n  Bugfix:\n  \n  - Minor but breaking issue in 00_reload_submodules\n\n  LaTeXTools Plugin version 3.7.0 (2016-04-19) changelog:\n  \n  \n  New features:\n  \n  - New Viewers:\n    - Preview.app\n    - Okular\n  - Improved bibiography parsing; should handle UTF-8 and most formatting\n  - Support for most citation commands and support for the various ways BibLaTeX has to add bibliographies\n  - Plugin system for handling viewers, builders, and bibliography file parsing\n  - Some internal improvements\n  \n  Bugfixes:\n  \n  - Internal bugfixes\n",
+			"settings":
+			{
+				"buffer_size": 2416,
+				"line_ending": "Unix",
+				"name": "Package Control Messages",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"file": "/Users/cserrao/Documents/Aulas/Desenvolvimento de Aplicações para Ambientes Móveis/aulasdaam/weatherMe/build/iphone/Classes/LocaleModule.m",
+			"settings":
+			{
+				"buffer_size": 2126,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "package.json",
+			"settings":
+			{
+				"buffer_size": 385,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: re",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"instaa",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 296.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/cserrao/Downloads/nodejs-server-server/controllers/User.js",
+		"/Users/cserrao/Sites/siuinde/siuinde_dump.sql",
+		"/Users/cserrao/Sites/siuinde/siuinde.local-error_log",
+		"/Users/cserrao/Sites/siuinde/scrapper.php",
+		"/Users/cserrao/Sites/siuinde/web/background.jpg",
+		"/Users/cserrao/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/cserrao/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/cserrao/Library/Application Support/Sublime Text 2/Packages/User/JSON.sublime-settings",
+		"/Users/cserrao/Documents/Aulas/Desenvolvimento de Aplicações para Ambientes Móveis/20152016/BaseDeDados.txt",
+		"/Users/cserrao/Documents/Pessoal/Artigos/Papers Revision/2016 CISTI 2016, 15-18 Junho, Canarias, Spain/175.txt",
+		"/Users/cserrao/Documents/Projects/Projectos de Dissertação de Mestrado/2014/Tiago Santos/paper/paper_SECRYPT2016-BLIND.tex",
+		"/Users/cserrao/Documents/Projects/Projectos de Dissertação de Mestrado/2014/Tiago Santos/paper/paper_SECRYPT2016.tex",
+		"/Users/cserrao/Sites/Innit/dashboard/Vagrantfile",
+		"/Users/cserrao/Sites/Innit/dashboard/ifdn-dashboard/Vagrantfile",
+		"/Users/cserrao/Documents/Development/Lighthouse/lighthouse/app/controllers/index.js",
+		"/Users/cserrao/Documents/Development/Lighthouse/lighthouse/app/controllers/serviceGroupsList.js",
+		"/Users/cserrao/Documents/Development/Lighthouse/lighthouse/app/controllers/main.js",
+		"/Users/cserrao/Documents/Development/Lighthouse/lighthouse/app/views/ios/index.xml",
+		"/Volumes/Movies/TV Series/The Last Man on Earth/S02/The.Last.Man.On.Earth.S02E01.HDTV.x264.srt",
+		"/Users/cserrao/Documents/Development/Lighthouse/lighthouse/app/views/index.xml",
+		"/Users/cserrao/Documents/Development/Lighthouse/lighthouse/tiapp.xml",
+		"/Users/cserrao/Documents/Development/Lighthouse/lighthouse/distributeAndroid.sh",
+		"/Users/cserrao/Documents/Development/Lighthouse/lighthouse/app/styles/index.tss",
+		"/Users/cserrao/Documents/Development/Lighthouse/lighthouse/app/styles/ios/index.tss",
+		"/Users/cserrao/Documents/Development/Lighthouse/lighthouse/app/views/main.xml",
+		"/Users/carlosserrao/Sites/aal4all/aal4allsec/API/server.js",
+		"/Users/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/controllers/activeAlarmDetail.js",
+		"/Volumes/UserData/carlosserrao/Library/Caches/Cleanup At Startup/Transmit/216C4FD6-D5CA-4D9A-8C22-5AB758B57860/LocalSettings.php",
+		"/Volumes/UserData/carlosserrao/Library/Caches/Cleanup At Startup/Transmit/39829291-A183-42C6-92C3-564461686016/config.php",
+		"/Volumes/UserData/carlosserrao/Library/Caches/Cleanup At Startup/Transmit/F2E77FFC-FF23-4942-A2AF-A3CEE5907AE8/TwitterFeed.php",
+		"/Volumes/UserData/carlosserrao/Library/Caches/Cleanup At Startup/Transmit/23D8AF72-8142-4FB4-9646-12873D2707C0/Foreground.skin.php",
+		"/Volumes/UserData/carlosserrao/Library/Caches/Cleanup At Startup/Transmit/4039CB72-A1C7-4473-8D44-EEAE5321147A/LocalSettings.php",
+		"/Volumes/UserData/carlosserrao/Library/Caches/Cleanup At Startup/Transmit/A02CDD13-EF56-4B44-8033-BAB012301926/Foreground.skin.php",
+		"/Volumes/UserData/carlosserrao/Library/Caches/Cleanup At Startup/Transmit/0AED98F5-852D-485C-B535-5FDD5D05ECC6/foreground.php",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/styles/index.tss",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/views/index.xml",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/controllers/index.js",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/views/ios/index.xml",
+		"/Volumes/UserData/carlosserrao/Library/Caches/Cleanup At Startup/Transmit/D59723D6-9AB2-4E1C-B898-C7E6A89CC0B2/LocalSettings.php",
+		"/Volumes/UserData/carlosserrao/Library/Caches/Cleanup At Startup/Transmit/86FD4749-F98D-4AD3-B67D-53E6FE0C346A/teams.php",
+		"/Volumes/UserData/carlosserrao/Documents/Aulas/Desenvolvimento de Aplicações para Ambientes Móveis/20132014/Development/fenix.php",
+		"/Volumes/UserData/carlosserrao/Library/Caches/Cleanup At Startup/Transmit/F7B1548D-C0DB-4AE8-AD86-A3D06F220FF9/add.php",
+		"/Volumes/UserData/carlosserrao/Library/Caches/Cleanup At Startup/Transmit/538775E0-9BF6-463E-BEAE-15AF67E3BD4E/createHugPostcard.php",
+		"/Volumes/UserData/carlosserrao/Library/Caches/Cleanup At Startup/Transmit/19F6D6AB-E5FC-48B8-95D6-31AFE75C57C0/doHug.php",
+		"/Volumes/UserData/carlosserrao/Documents/Development/opensdrm/AUS/AUS.ws.php",
+		"/Volumes/UserData/carlosserrao/Documents/Development/opensdrm/lib/common/PublicKey.class.php",
+		"/Volumes/UserData/carlosserrao/Documents/Development/opensdrm/lib/common/KeyGenerator.class.php",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/tiapp.xml",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/controllers/activeAlarmDetail.js",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/controllers/serviceDetail.js",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/controllers/main.js",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/views/main.xml",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/controllers/userProfile.js",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/controllers/servicesList.js",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/controllers/serviceGroupsList.js",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/views/userProfile.xml",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/styles/userProfile.tss",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/views/serviceDetail.xml",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/styles/main.tss",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/views/activeAlarmDetail.xml",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/views/serviceGroupsList.xml",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/views/servicesList.xml",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/styles/serviceDetail.tss",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/styles/activeAlarmDetail.tss",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/styles/serviceGroupsList.tss",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lighthouse/app/styles/servicesList.tss",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/tiapp.xml",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/app/controllers/index.js",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/app/controllers/serviceGroupsList.js",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/app/views/servicesList.xml",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/app/controllers/servicesList.js",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/app/views/serviceGroupsList.xml",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/app/styles/servicesList.tss",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/app/controllers/activeAlarmDetail.js",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/app/styles/serviceDetail.tss",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/app/views/main.xml",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/app/views/index.xml",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/app/styles/serviceGroupsList.tss",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/app/controllers/serviceDetail.js",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/app/views/serviceDetail.xml",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/app/controllers/main.js",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/app/styles/main.tss",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/app/alloy.js",
+		"/Volumes/UserData/carlosserrao/Library/Caches/Cleanup At Startup/Transmit/3CBD0E13-C5C7-4A69-8069-CE4E6D09359F/User.class.php",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/LighthouseAlarm/app/styles/index.tss",
+		"/Volumes/UserData/carlosserrao/Documents/Development/Lighthouse/lhAlarm/Resources/app.js",
+		"/Volumes/UserData/carlosserrao/Downloads/TiPlatformConnect-master/Resources/twitter.js",
+		"/Volumes/UserData/carlosserrao/Downloads/TiPlatformConnect-master/Resources/app.js",
+		"/Volumes/UserData/carlosserrao/Documents/Development/OombieGo Titanium/ooombie-v2/BackOffice/social_hub/login.php",
+		"/Volumes/UserData/carlosserrao/Library/Caches/Cleanup At Startup/Transmit/AAF7ADDC-6277-4A94-BEFE-E126229E2907/sendCheckin.php",
+		"/Volumes/UserData/carlosserrao/Documents/Development/OombieGo Titanium/ooombie-v2/BackOffice/Oombiestores/oombieapi/venues.php",
+		"/Volumes/UserData/carlosserrao/Documents/Development/OombieGo Titanium/ooombie-v2/BackOffice/Oombiestores/oombieapi/registerFacebookUser.php",
+		"/Volumes/UserData/carlosserrao/Documents/Development/OombieGo Titanium/ooombie-v2/BackOffice/Oombiestores/oombieapi/checkin.php",
+		"/Volumes/UserData/carlosserrao/Documents/Development/OombieGo Titanium/ooombie-v2/BackOffice/Oombiestores/classes/Card.class.php",
+		"/Volumes/UserData/carlosserrao/Documents/Development/OombieGo Titanium/ooombie-v2/BackOffice/Oombiestores/classes/Catalog.class.php",
+		"/Volumes/UserData/carlosserrao/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Volumes/UserData/carlosserrao/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Volumes/UserData/carlosserrao/Downloads/TiPlatformConnect-master/Resources/foursquare.js",
+		"/Volumes/UserData/carlosserrao/Library/Caches/Cleanup At Startup/Transmit/57D22A18-9659-4363-8B95-751A3AAFE59C/getVenueDetails.php",
+		"/Volumes/UserData/carlosserrao/Sites/oombieportal_v2/controllers/functions/fanart.php",
+		"/Volumes/UserData/carlosserrao/Documents/Development/OombieGo Titanium/ooombie-v2/App/oombie/app/controllers/user_profile.js",
+		"/Volumes/UserData/carlosserrao/Documents/Development/OombieGo Titanium/app/controllers/user_profile.js",
+		"/Volumes/UserData/carlosserrao/Documents/Development/OombieGo Titanium/ooombie-v2/App/oombie/app/controllers/index.js"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"/s/api/",
+			"getAccounts_recv",
+			"main",
+			"authorize",
+			"twitter",
+			"foursquare"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 7,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "server.js",
+					"settings":
+					{
+						"buffer_size": 908,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "poi.sql",
+					"settings":
+					{
+						"buffer_size": 302,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								23,
+								302
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SQL/SQL.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "poi.js",
+					"settings":
+					{
+						"buffer_size": 5166,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								275,
+								275
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1416.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Users/cserrao/Downloads/nodejs-server-server/index.js",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/Users/cserrao/Downloads/nodejs-server-server/api/swagger.yaml",
+					"settings":
+					{
+						"buffer_size": 9989,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/YAML/YAML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/Users/cserrao/Documents/Appcelerator_Studio_Workspace/Basic/build/iphone/Classes/TiViewTemplate.m",
+					"settings":
+					{
+						"buffer_size": 3785,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Objective-C/Objective-C.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 569.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"settings":
+					{
+						"buffer_size": 2416,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2416,
+								2416
+							]
+						],
+						"settings":
+						{
+							"auto_indent": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"tab_width": 2,
+							"translate_tabs_to_spaces": true,
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 564.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/Users/cserrao/Documents/Aulas/Desenvolvimento de Aplicações para Ambientes Móveis/aulasdaam/weatherMe/build/iphone/Classes/LocaleModule.m",
+					"settings":
+					{
+						"buffer_size": 2126,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Objective-C/Objective-C.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 326.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "package.json",
+					"settings":
+					{
+						"buffer_size": 385,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 145.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.latex_log":
+	{
+		"height": 100.0
+	},
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 207.0,
+	"status_bar_visible": true
+}

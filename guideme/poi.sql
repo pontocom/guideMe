@@ -1,0 +1,17 @@
+CREATE DATABASE pois;
+
+CREATE TABLE poi (
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(250),
+  address VARCHAR(250),
+  latt DOUBLE,
+  logt DOUBLE,
+  description TEXT,
+  image VARCHAR(255),
+  type INTEGER
+);
+
+CREATE TABLE type (
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(250)
+);
